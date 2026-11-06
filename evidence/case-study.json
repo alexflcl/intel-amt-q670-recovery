@@ -1,0 +1,56 @@
+{
+  "case_date": "2026-11-06",
+  "board": "Gigabyte Q670M D3H DDR4",
+  "pcb_revision": "1.1",
+  "bios": "F34a",
+  "csme": {
+    "version": "16.1.30.2255",
+    "sku": "Corporate H",
+    "final_hfsts1": "0x90000245",
+    "final_working_state": 5,
+    "final_operating_mode": 0,
+    "final_initialization_complete": true,
+    "final_error_code": 0
+  },
+  "fdo": {
+    "case_only_codec": "Realtek ALC897",
+    "case_only_connection": "pin 9 DVDDIO to pin 5 HDA_SDO through 2000 ohms",
+    "measured_dvddio_volts": 3.43,
+    "active_fdopss": 0,
+    "active_fracc": "0xffff",
+    "normal_fdopss": 1,
+    "normal_fracc": "0x4acf"
+  },
+  "flash_validation": {
+    "full_spi_bytes": 33554432,
+    "two_full_pre_write_reads_identical": true,
+    "original_me_restore_4k_sectors": 106,
+    "default_candidate_4k_sectors_written": 116,
+    "default_candidate_outside_me_identical": true,
+    "default_candidate_preserved_native_code": true,
+    "full_post_write_readback_matched_expected": true,
+    "hardware_write_protect_cleanup_verified": true,
+    "source_of_these_claims": "Private local diagnostic and image comparison records; summaries exported, raw dumps withheld"
+  },
+  "final_wsman_observations": {
+    "AMT_GeneralSettings.PrivacyLevel": 0,
+    "AMT_GeneralSettings.AMTNetworkEnabled": 1,
+    "IPS_OptInService.CanModifyOptInPolicy": 1,
+    "IPS_OptInService.OptInRequired": 0,
+    "IPS_OptInService.OptInState": 0,
+    "AMT_SetupAndConfigurationService.ProvisioningMode": 1,
+    "AMT_SetupAndConfigurationService.ProvisioningState": 2,
+    "current_control_mode_independently_queried": false,
+    "source": "Read-only local WS-Man queries during the final normal boot"
+  },
+  "functional_outcome": {
+    "proxmox_nvme_and_integrated_lan_recovered": true,
+    "owner_reported_operational_success": true,
+    "owner_confirmed_meshcommander_small_webapp": true,
+    "owner_confirmed_meshcommander_medium_webapp": true,
+    "root_storage_index_url_seen_in_browser_inventory": true,
+    "bare_root_url_entry_behavior_confirmed": false,
+    "large_build_tested": false,
+    "independent_recording_of_fresh_kvm_without_pin": false
+  }
+}

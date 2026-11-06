@@ -1,0 +1,26 @@
+# Keep firmware, provisioning state and private diagnostic archives out of Git.
+*.bin
+*.rom
+*.cap
+*.fd
+*.F[0-9]*
+*.gz
+*.zip
+*.7z
+*.rar
+*.tar
+*.exe
+*.msi
+*.key
+*.pem
+*.pfx
+*.p12
+*.log
+*.xml
+.env
+.env.*
+*credentials*
+*password*
+*private*
+__pycache__/
+*.pyc
