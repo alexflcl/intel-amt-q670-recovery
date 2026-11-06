@@ -2,6 +2,8 @@
 
 Esta es la parte específica del caso que hizo efectivo el cambio de privacidad. Requiere una copia propia válida, identificación exacta de las particiones y herramientas compatibles. Una imagen de otra unidad no conserva necesariamente las claves, configuración y datos de fabricación de la tuya.
 
+**También es la fase de cambio de privacidad para una placa sana.** El [recorrido principal](00-cambiar-privacy-level.md) ordena los pasos desde Enhanced hasta la prueba final de KVM. En nuestro caso se partió del volcado restaurado porque existía una avería previa; en una unidad funcional la fuente debe ser su propio respaldo funcional.
+
 ## Mapa observado
 
 Todos los intervalos de este documento son semiabiertos: incluyen el inicio y excluyen el final.
@@ -36,7 +38,7 @@ No se fabricaron HMAC ni se intentó presentar un CRC correcto como autenticaci�
 
 ## Procedimiento que sí dio resultado
 
-1. **Descomponer el volcado propio restaurado** con MFIT y guardar su configuración completa y componentes.
+1. **Descomponer el volcado propio funcional** con MFIT y guardar su configuración completa y componentes. En nuestro caso era el volcado restaurado; una placa sana utiliza su propia copia funcional.
 2. **Descomponer F32 oficial** y localizar su ME Sub Partition de fábrica, que incluía conjuntamente la base MFS/EFS no inicializada.
 3. Preparar una configuración de trabajo que mantuviera los valores y componentes propios y utilizara esa base de datos de fábrica como MeRegionFile.
 4. Generar dos imágenes de control desde esa misma base: una Enhanced y otra Default. La única opción funcional cambiada fue:

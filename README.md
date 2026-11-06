@@ -1,10 +1,15 @@
-# Intel AMT KVM en Gigabyte Q670: recuperación, privacidad y MeshCommander
+# Intel AMT en Gigabyte Q670: cambiar PrivacyLevel, habilitar KVM sin PIN y recuperar ME
 
 [English overview](README.en.md)
 
 Caso real documentado el **6 de noviembre de 2026**: una **Gigabyte Q670M D3H DDR4, revisión 1.1, BIOS F34a**, con **CSME Corporate H 16.1.30.2255**.
 
 El objetivo era utilizar KVM sin introducir un código de consentimiento en la pantalla local. La política **Enhanced** impedía desactivar esa exigencia. Durante la investigación, una modificación incompleta de los datos de ME dejó el subsistema sin inicializar y desaparecieron dispositivos, entre ellos el NVMe. Recuperamos el estado funcional y reconstruimos la configuración **Default**. Después alojamos MeshCommander dentro de AMT para abrir KVM desde un navegador, usando la propia IP de AMT.
+
+**Puedes seguir el recorrido de cambio de PrivacyLevel partiendo de una placa que funciona.** La avería forma parte de la historia de este caso y permite explicar cómo recuperarnos; no es un paso necesario para cambiar la política.
+
+➡ **[Recorrido principal: Enhanced → Default desde una placa sana](docs/00-cambiar-privacy-level.md)**  
+➡ **[Puente FDO en ALC897: foto, identificación, secuencia y efectos](docs/02-fdo-recuperacion.md)**
 
 ## Resultado y alcance
 
@@ -25,7 +30,7 @@ Los valores técnicos finales se resumen en [la ficha de evidencias](evidence/ca
 ## Por dónde empezar
 
 1. **AMT ya funciona y solo quieres KVM desde su IP:** ve directamente a [MeshCommander en el almacenamiento web](docs/04-meshcommander-web.md). No necesitas modificar la política de privacidad ni reconstruir ME si tus opciones de consentimiento ya son suficientes.
-2. **AMT funciona, pero no permite quitar el PIN:** comienza por [el diagnóstico de privacidad](docs/01-diagnostico.md).
+2. **AMT funciona, pero no permite quitar el PIN:** sigue el [recorrido de cambio de PrivacyLevel](docs/00-cambiar-privacy-level.md), que empieza por confirmar la causa.
 3. **ME no se inicializa o han desaparecido dispositivos tras modificarlo:** lee [FDO y recuperación](docs/02-fdo-recuperacion.md).
 4. **Necesitas entender cómo cambiamos Enhanced a Default:** consulta [la reconstrucción con MFIT](docs/03-mfit-default.md) y [los intentos que no resolvieron el problema](docs/05-cronologia.md).
 

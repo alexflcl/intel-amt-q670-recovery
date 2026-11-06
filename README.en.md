@@ -1,10 +1,12 @@
-# Intel AMT KVM recovery on a Gigabyte Q670 motherboard
+# Gigabyte Q670: change AMT PrivacyLevel, enable KVM without PIN, and recover ME
 
 [Documentación completa en español](README.md)
 
 This is a documented recovery of an owner's **Gigabyte Q670M D3H DDR4 rev. 1.1, BIOS F34a**, running **Intel CSME Corporate H 16.1.30.2255**.
 
 The original objective was KVM without a local consent PIN. Enhanced privacy prevented disabling consent. During investigation, an incomplete modification of ME runtime data left CSME uninitialized and devices, including the NVMe drive, disappeared. Recovery restored the owner's original ME data first. A subsequent MFIT reconstruction changed privacy to Default while preserving the native signed code and all other flash regions.
+
+**Changing PrivacyLevel on an otherwise working motherboard is a primary use case of this documentation.** Follow the [healthy-board Enhanced → Default workflow](docs/00-cambiar-privacy-level.md), which assembles the successful stages without the failed experiments. This complete sequence has not been independently repeated on a second healthy board; the final change in our unit was performed after recovery.
 
 ## Confirmed outcome
 
@@ -36,6 +38,8 @@ The accessible codec was a Realtek ALC897. A 2 kΩ resistor connected the identi
 The successful override boot showed FDOPSS=0 and FRACC=0xffff. The final normal boot showed FDOPSS=1 and FRACC=0x4acf. AMT functionality was assessed after removing FDO.
 
 See [the recovery account](docs/02-fdo-recuperacion.md), including why the audio chip was relevant and why desoldering the main WSON flash was unnecessary.
+
+That chapter now includes the original wiring photograph, pin counting for its orientation, a power-state sequence, and the effect of keeping the override active. The resistor sits between the two wires and is not visible in that photograph. FDO provides maintenance access; it does not change privacy by itself, and removing it does not undo firmware data already written.
 
 ## MeshCommander inside AMT 16.1
 
