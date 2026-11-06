@@ -1,5 +1,7 @@
 # 3. Reconstruir Default con MFIT conservando el código original
 
+Español · [English](en/03-mfit-default.md)
+
 Esta es la parte específica del caso que hizo efectivo el cambio de privacidad. Requiere una copia propia válida, identificación exacta de las particiones y herramientas compatibles. Una imagen de otra unidad no conserva necesariamente las claves, configuración y datos de fabricación de la tuya.
 
 **También es la fase de cambio de privacidad para una placa sana.** El [recorrido principal](00-cambiar-privacy-level.md) ordena los pasos desde Enhanced hasta la prueba final de KVM. En nuestro caso se partió del volcado restaurado porque existía una avería previa; en una unidad funcional la fuente debe ser su propio respaldo funcional.

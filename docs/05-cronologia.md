@@ -1,5 +1,7 @@
 # 5. Cronología y caminos que descartamos
 
+Español · [English](en/05-timeline.md)
+
 El valor de este caso está también en evitar repetir los intentos que no resolvieron la causa.
 
 | Fase | Resultado observado | Lección |

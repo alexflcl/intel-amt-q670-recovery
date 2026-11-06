@@ -1,5 +1,7 @@
 # 4. MeshCommander dentro de AMT 16.1: KVM desde la IP del equipo
 
+Español · [English](en/04-meshcommander-web.md)
+
 Si AMT ya funciona, esta parte se puede hacer por separado de FDO y de la reconstrucción de privacidad.
 
 En nuestro caso, el propietario confirmó que **Small funciona** y después que **Medium funciona bien**. Son aplicaciones alojadas en el servidor web de AMT, accesibles aunque Proxmox no esté funcionando, siempre que AMT conserve alimentación y conectividad. No se necesita mantener MeshCentral en otra máquina.

@@ -1,6 +1,6 @@
 # Intel AMT en Gigabyte Q670: cambiar PrivacyLevel, habilitar KVM sin PIN y recuperar ME
 
-[English overview](README.en.md)
+Español · [English — complete documentation](README.en.md)
 
 Caso real documentado el **6 de noviembre de 2026**: una **Gigabyte Q670M D3H DDR4, revisión 1.1, BIOS F34a**, con **CSME Corporate H 16.1.30.2255**.
 

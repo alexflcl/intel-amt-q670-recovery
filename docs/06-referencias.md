@@ -1,5 +1,7 @@
 # 6. Referencias técnicas y créditos
 
+Español · [English](en/06-references.md)
+
 ## Intel y fabricante de la placa
 
 - [Gigabyte Q670M D3H DDR4, soporte BIOS](https://www.gigabyte.com/Motherboard/Q670M-D3H-DDR4-rev-10/support): el portal público consultado enumera rev. 1.0; nuestra PCB llevaba rev. 1.1. Comprobar con el fabricante qué paquete corresponde a la unidad antes de utilizar una imagen.

@@ -1,68 +1,70 @@
-# Gigabyte Q670: change AMT PrivacyLevel, enable KVM without PIN, and recover ME
+# Intel AMT on Gigabyte Q670: change PrivacyLevel, enable KVM without a PIN, and recover ME
 
-[Documentación completa en español](README.md)
+[Español](README.md) · English — complete documentation
 
-This is a documented recovery of an owner's **Gigabyte Q670M D3H DDR4 rev. 1.1, BIOS F34a**, running **Intel CSME Corporate H 16.1.30.2255**.
+A real case documented on **6 November 2026**: a **Gigabyte Q670M D3H DDR4, PCB revision 1.1, BIOS F34a**, with **CSME Corporate H 16.1.30.2255**.
 
-The original objective was KVM without a local consent PIN. Enhanced privacy prevented disabling consent. During investigation, an incomplete modification of ME runtime data left CSME uninitialized and devices, including the NVMe drive, disappeared. Recovery restored the owner's original ME data first. A subsequent MFIT reconstruction changed privacy to Default while preserving the native signed code and all other flash regions.
+The objective was to use KVM without entering a consent code on the local display. **Enhanced** privacy prevented disabling that requirement. During investigation, an incomplete change to ME data left the subsystem uninitialized and devices, including NVMe, disappeared. We restored operation and rebuilt the **Default** configuration. We then hosted MeshCommander inside AMT so KVM could be opened in a browser through AMT's own IP.
 
-**Changing PrivacyLevel on an otherwise working motherboard is a primary use case of this documentation.** Follow the [healthy-board Enhanced → Default workflow](docs/00-cambiar-privacy-level.md), which assembles the successful stages without the failed experiments. This complete sequence has not been independently repeated on a second healthy board; the final change in our unit was performed after recovery.
+**The PrivacyLevel workflow can be followed from a working motherboard.** The failure is part of this case's history and explains recovery; it is not a required step for changing policy.
 
-## Confirmed outcome
+➡ **[Main workflow: Enhanced → Default from a working motherboard](docs/en/00-change-privacy-level.md)**  
+➡ **[ALC897 FDO connection: photo, identification, sequence and effects](docs/en/02-fdo-recovery.md)**
 
-- Proxmox, the NVMe drive and integrated Ethernet recovered.
-- A normal boot with physical FDO removed reported CSME working state 5, operating mode 0, initialization complete and error 0.
-- Read-only WS-Man queries returned PrivacyLevel=0 and OptInRequired=0.
-- The owner confirmed working MeshCommander Small and Medium web applications hosted by AMT.
-- Uploading an index.htm at the storage root is described; automatic entry from the bare / URL was not explicitly confirmed.
+## Results and scope
 
-See the [sanitized evidence record](evidence/case-study.json). Manual MEBx setup was performed, but ProvisioningMode=1 is not presented as independent proof of Admin Control Mode. A CurrentControlMode query was not retained.
+| Check | Result |
+| --- | --- |
+| Proxmox, NVMe and integrated Ethernet | Recovered |
+| CSME after removing FDO | Normal state, initialization complete, error 0 |
+| Effective PrivacyLevel | 0, Default |
+| Effective OptInRequired | 0 |
+| AMTNetworkEnabled | 1 |
+| MeshCommander Small and Medium hosted in AMT | Operation confirmed by the owner |
+| Replace the start page with index.htm | Procedure included; automatic entry from / awaits explicit confirmation |
 
-## What worked
+Final technical values are summarized in the [evidence record](evidence/case-study.json). It distinguishes system measurements, image checks and results reported by the owner.
 
-1. Obtain and retain the owner's own known-good backup.
-2. Temporarily assert the PCH flash-descriptor override strap through an accessible audio-codec connection.
-3. Verify override permissions and obtain two identical complete 32 MiB reads.
-4. Restore the original ME region and verify that all other regions remain unchanged.
-5. Use compatible MFIT 16.1 with a matching factory MFS/EFS base and the unit's complete configuration.
-6. Build Enhanced and Default controls, inspect differences, then preserve the original code/layout and transplant only the reviewed MDAT data interval.
-7. Re-decompose the candidate, verify configuration and code preservation, write only required sectors, and read back the entire SPI.
-8. Remove the physical override with power disconnected, boot normally, configure MEBx, and measure the effective policy.
+**This case does not establish a universal method for every Q670 motherboard or every 16.1 version.** Memory addresses, flash layout and physical wiring belong to the unit studied.
 
-The [detailed MFIT account](docs/03-mfit-default.md) gives the exact region boundaries of this unit and the distinction between the factory-build comparison and the larger runtime-data reset. These offsets are not a cross-platform recipe.
+## Where to start
 
-## Physical FDO used in this case
+1. **AMT works and you only want KVM from its IP:** go straight to [MeshCommander in web storage](docs/en/04-meshcommander-web.md). Privacy changes or ME reconstruction are unnecessary if your consent options are already sufficient.
+2. **AMT works but the PIN cannot be disabled:** follow the [PrivacyLevel workflow](docs/en/00-change-privacy-level.md), which starts by confirming the cause.
+3. **ME does not initialize or devices disappeared after a modification:** read [FDO and recovery](docs/en/02-fdo-recovery.md).
+4. **You want to understand how Enhanced was changed to Default:** see [MFIT reconstruction](docs/en/03-mfit-default.md) and [the approaches that did not solve the problem](docs/en/05-timeline.md).
 
-The accessible codec was a Realtek ALC897. A 2 kΩ resistor connected the identified pin 9 DVDDIO point to pin 5 HDA_SDO; DVDDIO measured approximately 3.43 V. Pin numbering, voltage and signal routing must be established for the actual board before using such a connection. Connections were prepared and removed with the PSU disconnected.
+The [check_q670_images.py utility](tools/check_q670_images.py) compares images offline and checks which areas change. It does not write firmware or certify bootability. [English usage instructions](tools/README.en.md).
 
-The successful override boot showed FDOPSS=0 and FRACC=0xffff. The final normal boot showed FDOPSS=1 and FRACC=0x4acf. AMT functionality was assessed after removing FDO.
+## All chapters in English
 
-See [the recovery account](docs/02-fdo-recuperacion.md), including why the audio chip was relevant and why desoldering the main WSON flash was unnecessary.
+| Chapter | Contents |
+| --- | --- |
+| [0. Change PrivacyLevel](docs/en/00-change-privacy-level.md) | Workflow from a working motherboard, preparation and final checks |
+| [1. Diagnosis](docs/en/01-diagnostics.md) | Privacy, provisioning, ME failure and observed errors |
+| [2. FDO connection and recovery](docs/en/02-fdo-recovery.md) | Original wiring photo, resistor, effects and power sequence |
+| [3. MFIT Default reconstruction](docs/en/03-mfit-default.md) | Region map, coherent data reconstruction and code preservation |
+| [4. MeshCommander in AMT](docs/en/04-meshcommander-web.md) | Manual upload, Small/Medium, index.htm and troubleshooting |
+| [5. Timeline](docs/en/05-timeline.md) | Failed attempts, lessons and levels of evidence |
+| [6. References](docs/en/06-references.md) | Primary references, upstream projects and contributions |
 
-That chapter now includes the original wiring photograph, pin counting for its orientation, a power-state sequence, and the effect of keeping the override active. The resistor sits between the two wires and is not visible in that photograph. FDO provides maintenance access; it does not change privacy by itself, and removing it does not undo firmware data already written.
+## What made recovery possible
 
-## MeshCommander inside AMT 16.1
+- Having our own ME backup from before the experiments, then obtaining two identical full SPI reads.
+- Temporarily enabling Flash Descriptor Override through a boot signal accessible at the audio codec.
+- Restoring our own backup first while preserving the other regions.
+- Rebuilding factory MFS/EFS data together with MFIT 16.1 and our own unit's configuration.
+- Keeping the original signed code and limiting the final write to the required data sectors.
+- Reading the whole flash after writing and checking CSME/AMT after a normal boot without FDO.
 
-The owner wanted the browser application served from AMT's own IP, independently of the host OS.
+## Equipment and tools
 
-Download the [official Small or Medium build](https://github.com/Ylianst/MeshCommander/tree/master/output), keep it compressed, rename it to fwm.htm.gz, and upload it through normal MeshCommander's Web Applications feature. Check that the destination filename and HTML MIME type are correct. Add a link, open AMT over HTTPS/16993, select Web Applications Links and test KVM.
+The case used live Linux with SSH, a second Windows computer, Intel Modular Flash Image Tool 16.1.25.2091, ME Analyzer for supplementary analysis, a soldering iron, fine wire and a 2 kΩ resistor. Supply voltage was measured with a FNIRSI 1014D oscilloscope; a multimeter is simpler for this DC measurement. Desoldering the flash and using an external programmer were unnecessary.
 
-For a homepage replacement, the documented method uses index.htm.gz with Vendor, Application and Link empty, producing /amt-storage/index.htm. Preserve a separately working application and test the file URL and bare / URL independently.
+Obtain Intel tools and firmware from an authorized source. This repository contains original documentation and an offline comparator; third-party downloads link to their projects. Board dumps may contain keys, provisioning state and unit-specific identifiers: use your own backups and keep them out of public repositories.
 
-Read the [full web application guide](docs/04-meshcommander-web.md). It distinguishes total storage capacity from upload-size problems, and working 16.1.30 installations from later builds where WebUI may be disabled. The relevant upstream discussion is [MeshCommander issue #99](https://github.com/Ylianst/MeshCommander/issues/99).
+## Sources and contributions
 
-## Failed approaches worth avoiding
+[Technical references and credits](docs/en/06-references.md). When contributing a case, include the board model, revision, BIOS, CSME version/SKU, symptom and how the result was verified. Share sanitized records without credentials, MAC addresses, UUIDs or complete flash images.
 
-Changing only the OEM privacy byte and its CRC did not update initialized runtime policy. Partial unprovisioning did not solve privacy and changed networking. Selective MFS edits did not produce a working solution; copying factory MFS alone broke initialization. Clearing CMOS did not restore ME data. Removing recovery assertions would have hidden failed preconditions.
-
-Read [the chronology](docs/05-cronologia.md) before repeating any of these experiments.
-
-## Scope, tooling and privacy
-
-This repository provides original documentation and a **read-only offline image comparator**, not a universal flasher. Reinitializing ME data can reset AMT provisioning and affect PTT/TPM-backed state. Preserve the needed recovery material before intervening.
-
-No proprietary Intel tools, full SPI images, credentials, MAC addresses, UUIDs, or private network addresses are redistributed. Obtain compatible manufacturer firmware and authorized tools separately. Do not use another unit's dump as a replacement for your own.
-
-The comparison utility checks changes against the recorded layout; it does not validate Intel signatures, compatible hardware, manufacturing settings or bootability.
-
-[References and credits](docs/06-referencias.md). Original content by **alexflcl**, prepared with Codex assistance. [MIT license](LICENSE).
+Documentation by **alexflcl**, prepared with Codex assistance from diagnosis and recovery of the owner's own system. [MIT license](LICENSE) for original repository content.

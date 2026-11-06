@@ -1,5 +1,7 @@
 # 2. Puente FDO en el ALC897: montaje, efectos y recuperación
 
+Español · [English](en/02-fdo-recovery.md)
+
 Este montaje pertenece a la **Gigabyte Q670M D3H DDR4 rev. 1.1 con Realtek ALC897** estudiada. En otra revisión puede cambiar el códec, la ruta de la señal o la alimentación.
 
 El montaje da acceso de mantenimiento para **cambiar PrivacyLevel o recuperar una imagen propia**. Si tu placa está sana, sigue el [recorrido directo Enhanced → Default](00-cambiar-privacy-level.md); no hay que provocar una avería ni restaurar ME antes de empezar.

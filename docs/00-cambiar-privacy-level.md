@@ -1,5 +1,7 @@
 # 0. Enhanced → Default partiendo de una placa que funciona
 
+Español · [English](en/00-change-privacy-level.md)
+
 Este recorrido aborda el objetivo original: **cambiar la política de privacidad para poder configurar KVM sin consentimiento local obligatorio**. Se organiza a partir de las etapas que terminaron funcionando en la unidad documentada, omitiendo los ensayos que fallaron.
 
 La secuencia completa, aplicada desde el principio sobre una segunda placa sana, **no se ha probado como un caso independiente**. En nuestra unidad el cambio final se ejecutó después de restaurar su estado funcional. Esta reorganización es una guía de preparación y ejecución basada en ese resultado.

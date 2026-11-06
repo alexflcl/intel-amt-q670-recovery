@@ -1,5 +1,7 @@
 # 1. Diagnóstico: distinguir privacidad, activación y avería de ME
 
+Español · [English](en/01-diagnostics.md)
+
 ## El síntoma inicial
 
 AMT estaba disponible, pero la política Enhanced obligaba al consentimiento local para KVM. Desactivar una casilla del cliente de gestión no eliminaba una restricción impuesta por la plataforma.

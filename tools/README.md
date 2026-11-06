@@ -1,5 +1,7 @@
 # Comparación offline de imágenes
 
+Español · [English](README.en.md)
+
 Requiere Python 3. No instala paquetes y no abre dispositivos físicos. Solo acepta archivos completos de 32 MiB con firma de descriptor y regiones correspondientes al caso publicado.
 
 ~~~sh
